@@ -32,6 +32,7 @@ namespace Clients
                 var p = Task.Factory.StartNew(()=>server.Send(clientsocket));
                 //Thread thread = new Thread(new ThreadStart(()=>server.Recieve(clientsocket)));
               //  thread.Start(User);
+              //using tasks
             }
         } 
         public void  Send(Socket client)
