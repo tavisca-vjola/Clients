@@ -7,14 +7,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Clients
+namespace finalServer
 {
     class Server
     {
         static void Main(string[] args)
         {
-            int port = 8080;
-            string ipaddress = "172.16.5.154";
+            int port = 5000;
+            string ipaddress = "192.168.0.102";
             Socket serverListner = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse(ipaddress),port);
             serverListner.Bind(ep);
@@ -28,10 +28,10 @@ namespace Clients
                 counter++;
                 clientsocket = serverListner.Accept();
                 Console.WriteLine(counter + "clients connected");
-                var s = Task.Factory.StartNew(()=>server.Recieve(clientsocket));
-                var p = Task.Factory.StartNew(()=>server.Send(clientsocket));
-                //Thread thread = new Thread(new ThreadStart(()=>server.Recieve(clientsocket)));
-              //  thread.Start(User);
+                //var s = Task.Factory.StartNew(()=>server.Recieve(clientsocket));
+               // var p = Task.Factory.StartNew(()=>server.Send(clientsocket));
+                Thread thread = new Thread(new ThreadStart(()=>server.Recieve(clientsocket)));
+                thread.Start();
               //using tasks
             }
         } 
